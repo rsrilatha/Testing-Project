@@ -40,10 +40,10 @@ IWebElement typeCodeDropdown = driver.FindElement(By.XPath("//*[@id=\"TypeCode_l
 typeCodeDropdown.Click();
 //click on code
 IWebElement codeTextbox = driver.FindElement(By.Id("Code"));
-codeTextbox.SendKeys("Testing");
+codeTextbox.SendKeys("Test");
 //enter the description
 IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
-descriptionTextbox.SendKeys("T description");
+descriptionTextbox.SendKeys("T ");
 //enter the price
 IWebElement priceTextbox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
 priceTextbox.SendKeys("25");
@@ -55,12 +55,37 @@ Thread.Sleep(2000);
 IWebElement goTolastpageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
 goTolastpageButton.Click();
 IWebElement newRecordCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-if (newRecordCode.Text == "Testing")
+if (newRecordCode.Text == "Test")
 {
     Console.WriteLine("new material/time record has been created successfully");
 }
 else
 {
     Console.WriteLine("new material/time record has not been created");
+
+}
+//Edit a new time record
+IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[1]/td[5]/a[1]"));
+editButton.Click();
+IWebElement codebox = driver.FindElement(By.Id("Code"));
+codebox.SendKeys("t s");
+IWebElement DescriptionBox = driver.FindElement(By.Id ("Description"));
+DescriptionBox.SendKeys("T s");
+IWebElement PriceBox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
+PriceBox.SendKeys("$2.00");
+IWebElement SaveButton = driver.FindElement(By.XPath("//*[@id=\"SaveButton\"]"));
+SaveButton.Click();
+Thread.Sleep(2000);
+//check if the new time record has been edited successfully
+IWebElement gotoLastpageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+gotoLastpageButton.Click();
+IWebElement EditRecordCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr/td[1]"));
+if (EditRecordCode.Text == "t s")
+{
+    Console.WriteLine("new material/time record has been Edited successfully");
+}
+else
+{
+    Console.WriteLine("new material/time record has not been edited");
 
 }
